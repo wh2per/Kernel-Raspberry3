@@ -1,0 +1,1 @@
+gcc -o wiring_led wiring_led.c -lwiringPi
