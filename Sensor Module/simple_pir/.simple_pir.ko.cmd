@@ -1,0 +1,1 @@
+cmd_/home/wh2per/Desktop/simple_pir/simple_pir.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/wh2per/Desktop/simple_pir/simple_pir.ko /home/wh2per/Desktop/simple_pir/simple_pir.o /home/wh2per/Desktop/simple_pir/simple_pir.mod.o ;  true
