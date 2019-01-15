@@ -1,0 +1,1 @@
+cmd_/home/wh2per/Desktop/simple_ioctl/simple_ioctl.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/wh2per/Desktop/simple_ioctl/simple_ioctl.ko /home/wh2per/Desktop/simple_ioctl/simple_ioctl.o /home/wh2per/Desktop/simple_ioctl/simple_ioctl.mod.o ;  true
