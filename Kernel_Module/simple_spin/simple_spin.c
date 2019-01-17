@@ -26,9 +26,7 @@ void delay(int sec){
 
 static int simple_spin_read(struct str_st *buf){
 	int ret;
-	printk("delay before");
 	delay(5);
-	printk("delay after");
 	spin_lock(&my_lock);
 	// 임계영역 
 	ret = copy_to_user(buf, kern_buf, sizeof(struct str_st));	// kern_buf -> buf
@@ -42,16 +40,17 @@ static int simple_spin_read(struct str_st *buf){
 static int simple_spin_write(struct str_st *buf){
 	int ret;
 	
+	printk("before write");
 	spin_lock(&my_lock);
 	// 임계영역 
 	ret = copy_from_user(kern_buf, buf, sizeof(struct str_st));	// buf -> kern_buf
 	//
 	spin_unlock(&my_lock);
-
+	printk("after write");
 	return ret;
 }	
 
-static long spin_ioctl(struct file *file, unsigned int cmd, unsigned long arg){
+static long simple_spin_ioctl(struct file *file, unsigned int cmd, unsigned long arg){
 	struct str_st *user_buf;
 	int ret;
 	
@@ -83,7 +82,7 @@ static int simple_spin_release(struct inode *inode, struct file *file){
 }
 
 struct file_operations simple_spin_fops ={
-	.unlocked_ioctl = spin_ioctl,
+	.unlocked_ioctl = simple_spin_ioctl,
 	.release = simple_spin_release,
 	.open = simple_spin_open,
 	
@@ -99,6 +98,7 @@ static int __init simple_spin_init(void){
 	// char device driver 영역 할당 
 	alloc_chrdev_region(&dev_num, 0,1,DEV_NAME);
 	cd_cdev = cdev_alloc();
+	cdev_init(cd_cdev,&simple_spin_fops);
 	// char device 추가 
 	ret = cdev_add(cd_cdev,dev_num,1);
 	if(ret<0){
@@ -106,6 +106,9 @@ static int __init simple_spin_init(void){
 		return -1;
 	}
 	
+	// 스핀락 초기화 
+	spin_lock_init(&my_lock);
+
 	// kern_buf 메모리 할당 
 	kern_buf = (struct str_st*)kmalloc(sizeof(struct str_st), GFP_KERNEL);
 	memset(kern_buf, '\0', sizeof(struct str_st));
