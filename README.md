@@ -33,4 +33,14 @@
       mknod /dev/$MODULE c $MAJOR 0
 
 ### How to Cross Compile
-      arm-linux-gnueabif-gcc -o module_code_app module_code_app.c
+      $ arm-linux-gnueabif-gcc -o module_code_app module_code_app.c
+
+### How to Run
+      $ sudo insmod module.ko
+      $ sudo sh mknod.sh
+      $ ./module_code_app
+
+### How to Quit
+      $ sudo rmmod module.ko
+      $ rm /dev/module_dev
+      
