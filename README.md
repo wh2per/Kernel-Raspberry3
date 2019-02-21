@@ -16,3 +16,21 @@
 - [x] PIR
 - [x] timer with LED
 - [x] wiring LCD
+
+### How to make Makefile
+      obj-m := module_code.o
+      KDIR := ~/Desktop/dev/rpi3_linux/linux
+      
+      default:
+          make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -C$(KDIR) M=$(shell pwd) modules
+      clean:
+          make -C$(KDIR) M=$(shell pwd) clean
+          
+### How to make mknod.sh
+      MODULE = "module_dev"
+      MAJOR=$(awk "\$2==\"$MODULE\" {print \$1}" /proc/devices)
+      
+      mknod /dev/$MODULE c $MAJOR 0
+
+### How to Cross Compile
+      arm-linux-gnueabif-gcc -o module_code_app module_code_app.c
