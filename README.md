@@ -17,7 +17,7 @@
 - [x] timer with LED
 - [x] wiring LCD
 
-### How to make Makefile
+### 1. How to make Makefile
       obj-m := module_code.o
       KDIR := ~/Desktop/dev/rpi3_linux/linux
       
@@ -26,21 +26,21 @@
       clean:
           make -C$(KDIR) M=$(shell pwd) clean
           
-### How to make mknod.sh
+### 2. How to make mknod.sh
       MODULE = "module_dev"
       MAJOR=$(awk "\$2==\"$MODULE\" {print \$1}" /proc/devices)
       
       mknod /dev/$MODULE c $MAJOR 0
 
-### How to Cross Compile
+### 3. How to Cross Compile
       $ arm-linux-gnueabif-gcc -o module_code_app module_code_app.c
 
-### How to Run
+### 4. How to Run
       $ sudo insmod module.ko
       $ sudo sh mknod.sh
       $ ./module_code_app
 
-### How to Quit
+### 5. How to Quit
       $ sudo rmmod module.ko
       $ rm /dev/module_dev
       
