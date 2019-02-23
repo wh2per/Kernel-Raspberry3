@@ -1,6 +1,6 @@
 # Raspberry-Pi-3
-
-## Kernel Module
+## To Do List
+### 1. Kernel Module
 - [x] export_var
 - [x] linked_list
 - [x] blocking I/O
@@ -10,13 +10,14 @@
 - [x] spinlock
 - [x] kernel timer
 
-## Sensor Module
+### 2. Sensor Module
 - [x] LED
 - [x] wiring LED
 - [x] PIR
 - [x] timer with LED
 - [x] wiring LCD
 
+## Manual
 ### 1. How to make Makefile
       obj-m := module_code.o
       KDIR := ~/Desktop/dev/rpi3_linux/linux
