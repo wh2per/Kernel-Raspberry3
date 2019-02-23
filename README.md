@@ -37,11 +37,11 @@
       $ arm-linux-gnueabif-gcc -o module_code_app module_code_app.c
 
 ### 4. How to Run
-      $ sudo insmod module.ko
-      $ sudo sh mknod.sh
-      $ ./module_code_app
+      $ sudo insmod module.ko       // load module code 
+      $ sudo sh mknod.sh            // register device driver
+      $ ./module_code_app           // run object file
 
 ### 5. How to Quit
-      $ sudo rmmod module.ko
-      $ rm /dev/module_dev
+      $ sudo rmmod module.ko        // remove module code
+      $ rm /dev/module_dev          // remove device driver
       
